@@ -1,0 +1,1443 @@
+basePath: /api/v1
+definitions:
+  dto.BusinessCoinProgramStatsResponse:
+    properties:
+      coupons_purchased_in_period:
+        type: integer
+      points_received_in_period:
+        type: integer
+      total_coupons_purchased:
+        type: integer
+      total_points_received:
+        type: integer
+    type: object
+  dto.BusinessLoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+      - email
+      - password
+    type: object
+  dto.BusinessRegisterRequest:
+    properties:
+      description:
+        maxLength: 150
+        type: string
+      email:
+        type: string
+      name:
+        maxLength: 100
+        minLength: 3
+        type: string
+      password:
+        type: string
+    required:
+      - email
+      - name
+      - password
+    type: object
+  dto.BusinessRegisterResponse:
+    properties:
+      description:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  dto.BusinessReturn:
+    properties:
+      description:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  dto.BusinessStatsDailyActiveUsersResponse:
+    properties:
+      active_users:
+        type: integer
+      date:
+        type: string
+    type: object
+  dto.BusinessStatsDailyTotalUsersResponse:
+    properties:
+      date:
+        type: string
+      total_users:
+        type: integer
+    type: object
+  dto.BusinessStatsResponse:
+    properties:
+      active_users:
+        type: integer
+      new_users:
+        type: integer
+      total_users:
+        type: integer
+    type: object
+  dto.BusinessUpdateRequest:
+    properties:
+      description:
+        maxLength: 150
+        type: string
+      name:
+        maxLength: 100
+        minLength: 3
+        type: string
+    required:
+      - name
+    type: object
+  dto.CoinProgramCreateRequest:
+    properties:
+      card_color:
+        type: string
+      day_limit:
+        minimum: 1
+        type: integer
+      description:
+        maxLength: 150
+        type: string
+      name:
+        maxLength: 30
+        minLength: 3
+        type: string
+    required:
+      - card_color
+      - day_limit
+      - name
+    type: object
+  dto.CoinProgramCreateResponse:
+    properties:
+      card_color:
+        type: string
+      day_limit:
+        type: integer
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  dto.CoinProgramParticipantReturn:
+    properties:
+      balance:
+        type: integer
+      card_color:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  dto.CoinProgramReturn:
+    properties:
+      card_color:
+        type: string
+      day_limit:
+        type: integer
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  dto.CoinProgramUpdateRequest:
+    properties:
+      card_color:
+        type: string
+      day_limit:
+        minimum: 1
+        type: integer
+      description:
+        maxLength: 150
+        type: string
+      name:
+        maxLength: 30
+        minLength: 3
+        type: string
+    required:
+      - card_color
+      - day_limit
+      - name
+    type: object
+  dto.CoinProgramUpdateResponse:
+    properties:
+      card_color:
+        type: string
+      day_limit:
+        type: integer
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  dto.CoinProgramWithRewardsReturn:
+    properties:
+      coin_program:
+        $ref: '#/definitions/dto.CoinProgramParticipantReturn'
+      rewards:
+        items:
+          $ref: '#/definitions/dto.RewardReturn'
+        type: array
+    type: object
+  dto.HTTPStatus:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
+  dto.QRGetResponse:
+    properties:
+      data:
+        type: string
+    type: object
+  dto.RewardActivateRequest:
+    properties:
+      code:
+        type: string
+    required:
+      - code
+    type: object
+  dto.RewardBuyResponse:
+    properties:
+      code:
+        type: string
+    type: object
+  dto.RewardCreateRequest:
+    properties:
+      cost:
+        minimum: 1
+        type: integer
+      description:
+        maxLength: 150
+        type: string
+      image_url:
+        type: string
+      name:
+        maxLength: 50
+        minLength: 3
+        type: string
+    required:
+      - cost
+      - image_url
+      - name
+    type: object
+  dto.RewardCreateResponse:
+    properties:
+      cost:
+        type: integer
+      description:
+        type: string
+      id:
+        type: string
+      image_url:
+        type: string
+      name:
+        type: string
+    type: object
+  dto.RewardReturn:
+    properties:
+      cost:
+        type: integer
+      description:
+        type: string
+      id:
+        type: string
+      image_url:
+        type: string
+      name:
+        type: string
+    type: object
+  dto.UserEnrollCoinRequest:
+    properties:
+      code:
+        type: string
+    required:
+      - code
+    type: object
+  dto.UserGetResponse:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      statistics:
+        $ref: '#/definitions/dto.UserStatisticsResponse'
+    type: object
+  dto.UserLoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+      - email
+      - password
+    type: object
+  dto.UserQRScanResponse:
+    properties:
+      balance:
+        type: integer
+      username:
+        type: string
+    type: object
+  dto.UserRegisterRequest:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    required:
+      - email
+      - name
+      - password
+    type: object
+  dto.UserRegisterResponse:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  dto.UserStatisticsResponse:
+    properties:
+      coupons_bought:
+        type: integer
+      user_qr_scanned_count:
+        type: integer
+    type: object
+host: prod-team-22-t62v97db.final.prodcontest.ru
+info:
+  contact: { }
+  description: API of LoyalT - platform for creating and managing loyalty programs
+  termsOfService: http://swagger.io/terms/
+  title: LoyalT API
+  version: "1.0"
+paths:
+  /business:
+    put:
+      consumes:
+        - application/json
+      description: Update business
+      parameters:
+        - description: Business data for update
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/dto.BusinessUpdateRequest'
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.BusinessReturn'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - BusinessAuthCookie: [ ]
+      summary: Update business
+      tags:
+        - Business
+  /business/auth/login:
+    post:
+      consumes:
+        - application/json
+      description: Authenticate business and set secure cookie "business_auth_token"
+        with JWT token
+      parameters:
+        - description: Business credentials
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/dto.BusinessLoginRequest'
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      summary: Business login
+      tags:
+        - Auth
+  /business/auth/logout:
+    post:
+      consumes:
+        - application/json
+      description: Delete secure cookie "business_auth_token" with JWT token
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      summary: Business logout
+      tags:
+        - Auth
+  /business/auth/register:
+    post:
+      consumes:
+        - application/json
+      description: Register a new business in the system
+      parameters:
+        - description: Business registration data
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/dto.BusinessRegisterRequest'
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.BusinessRegisterResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      summary: Register new business
+      tags:
+        - Auth
+  /business/coin_program:
+    get:
+      consumes:
+        - application/json
+      description: Get business coin program. Requires business_auth_token cookie
+        for authentication.
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CoinProgramReturn'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - BusinessAuthCookie: [ ]
+      summary: Get coin program
+      tags:
+        - Business
+    post:
+      consumes:
+        - application/json
+      description: Create new coin program and return it. Requires business_auth_token
+        cookie for authentication.
+      parameters:
+        - description: Data for creation
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/dto.CoinProgramCreateRequest'
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CoinProgramCreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - BusinessAuthCookie: [ ]
+      summary: Create new coin program
+      tags:
+        - Business
+    put:
+      consumes:
+        - application/json
+      description: Update business coin program. Requires business_auth_token cookie
+        for authentication.
+      parameters:
+        - description: Data for update
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/dto.CoinProgramUpdateRequest'
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CoinProgramUpdateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - BusinessAuthCookie: [ ]
+      summary: Update coin program
+      tags:
+        - Business
+  /business/coin_program/reward/{reward_id}:
+    delete:
+      consumes:
+        - application/json
+      description: Delete reward from coin program. Requires business_auth_token cookie
+        for authentication.
+      parameters:
+        - description: Reward ID (uuid)
+          in: path
+          name: reward_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - BusinessAuthCookie: [ ]
+      summary: Delete reward
+      tags:
+        - Business
+  /business/coin_program/rewards:
+    get:
+      consumes:
+        - application/json
+      description: List rewards for coin program. Requires business_auth_token cookie
+        for authentication.
+      parameters:
+        - default: 10
+          description: Number of items to return
+          in: query
+          minimum: 1
+          name: limit
+          type: integer
+        - default: 0
+          description: Number of items to skip
+          in: query
+          minimum: 0
+          name: offset
+          type: integer
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: List of rewards
+          schema:
+            items:
+              $ref: '#/definitions/dto.RewardReturn'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - BusinessAuthCookie: [ ]
+      summary: List rewards
+      tags:
+        - Business
+    post:
+      consumes:
+        - application/json
+      description: Create new reward for coin program. Requires business_auth_token
+        cookie for authentication.
+      parameters:
+        - description: Reward creation data
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/dto.RewardCreateRequest'
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.RewardCreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - BusinessAuthCookie: [ ]
+      summary: Create new reward
+      tags:
+        - Business
+  /business/coin_program/rewards/activate:
+    post:
+      consumes:
+        - application/json
+      description: Activate scanned coupon code. Requires business_auth_token cookie
+        for authentication.
+      parameters:
+        - description: Reward activation data
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/dto.RewardActivateRequest'
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.RewardReturn'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - BusinessAuthCookie: [ ]
+      summary: Activate scanned coupon code
+      tags:
+        - Business
+  /business/coin_program/scan/{code}:
+    get:
+      consumes:
+        - application/json
+      description: Scan user QR to get user data and validate QR
+      parameters:
+        - description: QR code data
+          in: query
+          name: code
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UserQRScanResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - BusinessAuthCookie: [ ]
+      summary: Scan user QR
+      tags:
+        - Business
+  /business/coin_program/scan/enroll:
+    post:
+      consumes:
+        - application/json
+      description: Add 1 coin to user coin program by qr code
+      parameters:
+        - description: User QR scan data
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/dto.UserEnrollCoinRequest'
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - BusinessAuthCookie: [ ]
+      summary: Enroll coin to user by qr code
+      tags:
+        - Business
+  /business/me:
+    get:
+      consumes:
+        - application/json
+      description: Get business profile
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.BusinessReturn'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - BusinessAuthCookie: [ ]
+      summary: Get business profile
+      tags:
+        - Auth
+  /business/stats/coin_program:
+    get:
+      consumes:
+        - application/json
+      description: Get business coin program stats. Requires business_auth_token cookie
+        for authentication.
+      parameters:
+        - description: period start date
+          in: query
+          name: start_date
+          type: string
+        - description: period end date
+          in: query
+          name: end_date
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.BusinessCoinProgramStatsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - BusinessAuthCookie: [ ]
+      summary: Get business coin program stats
+      tags:
+        - Business
+  /business/stats/daily/active_users:
+    get:
+      consumes:
+        - application/json
+      description: Get business active users daily stats. Requires business_auth_token
+        cookie for authentication.
+      parameters:
+        - description: period start date
+          in: query
+          name: start_date
+          type: string
+        - description: period end date
+          in: query
+          name: end_date
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.BusinessStatsDailyActiveUsersResponse'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - BusinessAuthCookie: [ ]
+      summary: Get business active users daily stats
+      tags:
+        - Business
+  /business/stats/daily/total_users:
+    get:
+      consumes:
+        - application/json
+      description: Get business total users daily stats. Requires business_auth_token
+        cookie for authentication.
+      parameters:
+        - description: period start date
+          in: query
+          name: start_date
+          type: string
+        - description: period end date
+          in: query
+          name: end_date
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.BusinessStatsDailyTotalUsersResponse'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - BusinessAuthCookie: [ ]
+      summary: Get business total users daily stats
+      tags:
+        - Business
+  /business/stats/general:
+    get:
+      consumes:
+        - application/json
+      description: Get business general stats. Requires business_auth_token cookie
+        for authentication.
+      parameters:
+        - description: period start date
+          in: query
+          name: start_date
+          type: string
+        - description: period end date
+          in: query
+          name: end_date
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.BusinessStatsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - BusinessAuthCookie: [ ]
+      summary: Get business stats
+      tags:
+        - Business
+  /user/auth/login:
+    post:
+      consumes:
+        - application/json
+      description: Authenticate user and set secure cookie "user_auth_token" with
+        JWT token
+      parameters:
+        - description: User credentials
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/dto.UserLoginRequest'
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      summary: User login
+      tags:
+        - Auth
+  /user/auth/logout:
+    post:
+      consumes:
+        - application/json
+      description: Delete secure cookie "user_auth_token" with JWT token
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      summary: User logout
+      tags:
+        - Auth
+  /user/auth/register:
+    post:
+      consumes:
+        - application/json
+      description: Register a new user in the system
+      parameters:
+        - description: User registration data
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/dto.UserRegisterRequest'
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.UserRegisterResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      summary: Register new user
+      tags:
+        - Auth
+  /user/coin_programs:
+    get:
+      consumes:
+        - application/json
+      description: Get user's coin programs. Requires business_auth_token cookie for
+        authentication.
+      parameters:
+        - description: Limit
+          in: query
+          name: limit
+          required: true
+          type: integer
+        - description: Offset
+          in: query
+          name: offset
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.CoinProgramParticipantReturn'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - UserAuthCookie: [ ]
+      summary: List user's coin programs
+      tags:
+        - User
+  /user/coin_programs/{coin_program_id}/rewards/{reward_id}/buy:
+    post:
+      consumes:
+        - application/json
+      description: Buy reward by its id. Requires user_auth_token cookie for authentication.
+      parameters:
+        - description: Coin program ID (uuid)
+          in: path
+          name: coin_program_participant_id
+          required: true
+          type: string
+        - description: Reward ID (uuid)
+          in: path
+          name: reward_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.RewardBuyResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "402":
+          description: Payment Required
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - UserAuthCookie: [ ]
+      summary: Buy reward by its id
+      tags:
+        - User
+  /user/coin_programs/{coin_program_participant_id}:
+    get:
+      consumes:
+        - application/json
+      description: Get user's coin program by ID. Requires business_auth_token cookie
+        for authentication.
+      parameters:
+        - description: Coin program ID (uuid)
+          in: path
+          name: coin_program_participant_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.CoinProgramParticipantReturn'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - UserAuthCookie: [ ]
+      summary: Get user's coin program by id
+      tags:
+        - User
+  /user/coin_programs/{coin_program_participant_id}/rewards:
+    get:
+      consumes:
+        - application/json
+      description: List rewards for user by coin program id. Requires business_auth_token
+        cookie for authentication.
+      parameters:
+        - description: Coin program participant id
+          in: path
+          name: coin_program_participant_id
+          required: true
+          type: string
+        - default: 10
+          description: Number of items to return
+          in: query
+          minimum: 1
+          name: limit
+          type: integer
+        - default: 0
+          description: Number of items to skip
+          in: query
+          minimum: 0
+          name: offset
+          type: integer
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: List of rewards
+          schema:
+            items:
+              $ref: '#/definitions/dto.RewardReturn'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - UserAuthCookie: [ ]
+      summary: List rewards for user
+      tags:
+        - User
+  /user/coin_programs/rewards/available:
+    get:
+      consumes:
+        - application/json
+      description: Get rewards available for user. Requires business_auth_token cookie
+        for authentication.
+      parameters:
+        - description: Limit
+          in: query
+          name: limit
+          required: true
+          type: integer
+        - description: Offset
+          in: query
+          name: offset
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.CoinProgramWithRewardsReturn'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      security:
+        - UserAuthCookie: [ ]
+      summary: Get rewards available for user
+      tags:
+        - User
+  /user/me:
+    get:
+      consumes:
+        - application/json
+      description: Get user profile
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UserGetResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      summary: Get user profile
+      tags:
+        - Auth
+  /user/qr:
+    get:
+      consumes:
+        - application/json
+      description: Get user qr code data
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.QRGetResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.HTTPStatus'
+      summary: Get user qr code data
+      tags:
+        - User
+schemes:
+  - https
+swagger: "2.0"
